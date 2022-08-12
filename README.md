@@ -1,6 +1,6 @@
 # Domain-Specific Text Generation for Machine Translation
 
-Scripts and config files for the paper
+Scripts and config files for our paper, [Domain-Specific Text Generation for Machine Translation](http://arxiv.org/abs/2208.05909)
 
 
 ## Citation
