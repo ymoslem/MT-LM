@@ -5,7 +5,7 @@ Scripts and config files for the paper
 
 ## Citation
 
-```
+```bibtex
 @inproceedings{moslem-2022-domain,
     title = "Domain-Specific Text Generation for Machine Translation",
     author = "Moslem, Yasmin  and
@@ -17,7 +17,6 @@ Scripts and config files for the paper
     year = "2022",
     address = "Orlando, Florida, USA",
     publisher = "Association for Machine Translation in the Americas",
-    url = "",
-    pages = "",
+    url = "http://arxiv.org/abs/2208.05909",
 }
 ```
