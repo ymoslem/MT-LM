@@ -1,0 +1,97 @@
+model_dir: model-mixed-exp2-500/
+
+data:
+  train_features_file:
+    - ../data/oversampling/all.filtered.subword.filtered.en.train.mixed
+    - ../data/gpt/enar/exp2/gpt.bt.filtered.semantic.en.subword
+  train_labels_file:
+    - ../data/oversampling/all.filtered.subword.filtered.ar.train.mixed
+    - ../data/gpt/enar/exp2/gpt.filtered.semantic.ar.subword
+  train_files_weights:
+    - 0.1
+    - 0.9
+  eval_features_file: ../data/tico/tico-19.final.en.dev.subword
+  eval_labels_file: ../data/tico/tico-19.final.ar.dev.subword
+  source_vocabulary: ../subword/vocab.tf.en
+  target_vocabulary: ../subword/vocab.tf.ar
+
+  # Add <s> & </s> automatically, if you did not add them manually
+  source_sequence_controls:
+    start: true
+    end: true
+
+
+# Model and optimization parameters.
+params:
+  # (optional) Replace unknown target tokens by the original source token with the
+  # highest attention (default: false).
+  replace_unknown_target: true
+
+train:
+  # (optional when batch_type=tokens) If not set, the training will search the largest
+  # possible batch size.
+  batch_size: 2048
+  # (optional) Batch size is the number of "examples" or "tokens" (default: "examples").
+  batch_type: tokens
+
+  # (optional) The number of elements from which to sample during shuffling (default: 500000).
+  # Set 0 or null to disable shuffling, -1 to match the number of training examples.
+  sample_buffer_size: 10000000
+  # (optional) Save a checkpoint every this many steps (default: 5000).
+  save_checkpoints_steps: 500 #5000
+  # (optional) How many checkpoints to keep on disk.
+  keep_checkpoint_max: 50
+  # (optional) Maximum training step. If not set, train forever.
+  max_step: 2000 #5000
+
+  # (optional) The maximum length of feature sequences during training (default: null).
+  maximum_features_length: 200
+  # (optional) The maximum length of label sequences during training (default: null).
+  maximum_labels_length: 200
+
+  # (optional) Number of checkpoints to average at the end of the training to the directory
+  # model_dir/avg (default: 0).
+  average_last_checkpoints: 8
+
+# (optional) Evaluation options.
+eval:
+  # (optional) The batch size to use (default: 32).
+  batch_size: 1024
+  # (optional) Batch size is the number of "examples" or "tokens" (default: "examples").
+  batch_type: tokens
+
+  # (optional) Evaluate every this many steps (default: 5000).
+  steps: 500 #5000
+
+  # (optional) Save evaluation predictions in model_dir/eval/.
+  save_eval_predictions: true
+
+  # (optional) Scorer or list of scorers that are called on the saved evaluation predictions.
+  # Available scorers: bleu, rouge, wer, ter, prf
+  scorers: bleu
+
+  # (optional) Export a model when a metric has the best value so far (default: null).
+  export_on_best: bleu
+  # (optional) Format of the exported model (can be: "saved_model, "checkpoint",
+  # "ctranslate2", "ctranslate2_int8", "ctranslate2_int16", "ctranslate2_float16",
+  # default: "saved_model").
+  export_format: ctranslate2_int8
+  # (optional) Maximum number of exports to keep on disk (default: 5).
+  max_exports_to_keep: 20
+
+  # (optional) The width of the length buckets to select batch candidates from.
+  # If set, the eval data will be sorted by length to increase the translation
+  # efficiency. The predictions will still be outputted in order as they are
+  # available (default: 0).
+  length_bucket_width: 5
+
+  # (optional) Early stopping condition.
+  # Should be read as: stop the training if "metric" did not improve more
+  # than "min_improvement" in the last "steps" evaluations.
+  early_stopping:
+    # (optional) The target metric name (default: "loss").
+    metric: bleu
+    # (optional) The metric should improve at least by this much to be considered
+    # as an improvement (default: 0)
+    min_improvement: 0.01
+    steps: 3
