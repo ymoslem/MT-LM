@@ -1,4 +1,4 @@
-# python3 gpt_generate_beam.py <target_file> <new_output_file> <gpu_id>
+# python3 GPTJ_generate.py <target_file> <new_output_file> <gpu_id>
 
 
 from transformers import GPTJForCausalLM, AutoTokenizer, set_seed
