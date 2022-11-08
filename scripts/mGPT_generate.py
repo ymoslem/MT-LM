@@ -1,4 +1,4 @@
-# python3 gpt_generate_beam.py <target_file> <new_output_file> <lang> <gpu_id>
+# python3 mGPT_generate.py <target_file> <new_output_file> <lang> <gpu_id>
 
 from transformers import AutoTokenizer, AutoModelForCausalLM, set_seed
 import torch
