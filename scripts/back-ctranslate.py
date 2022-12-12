@@ -1,3 +1,4 @@
+# Convert an OPUS model to CTranslate2: ct2-opus-mt-converter --model_dir opus_model --output_dir ct2_model --quantization int8
 # python3 ctranslate.py <model_path> <sp_source_model> <sp_target_model> <source_file_path>
 
 #!/usr/bin/env python3
