@@ -1,4 +1,4 @@
-# python3 GPTJ_generate.py <target_file> <new_output_file> <gpu_id>
+# python3 GPTJ_generate.py <input_target_file> <output_generation_file> <gpu_id>
 
 
 from transformers import GPTJForCausalLM, AutoTokenizer, set_seed
@@ -69,9 +69,9 @@ with open(target_file) as target, open (output_file, "a+") as output:
                                           num_return_sequences=5,
                                           early_stopping=True)
 
-        generated_text_beam = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)
+        generated_text = tokenizer.batch_decode(generated_tokens, skip_special_tokens=True)
 
-        for genenrated_output in generated_text_beam:
+        for genenrated_output in generated_text:
             # Split generated text into sentences
             generated_lines = split_text_into_sentences(genenrated_output, language="en")
             # remove the first sent, which is the original one
