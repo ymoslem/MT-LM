@@ -3,6 +3,11 @@
 Scripts and config files for our paper, [Domain-Specific Text Generation for Machine Translation](https://aclanthology.org/2022.amta-research.2)
 
 
+## Summary
+
+Using Large Language Models (LLMs) to generate synthetic data that simulate the domain and linguistic characteristics of the authentic data. You can check this [article](https://blog.machinetranslation.io/synthetic-data-machine-translation/) for an extended summary or the full [paper](https://aclanthology.org/2022.amta-research.2).
+
+
 ## Citation
 
 ```bibtex
